@@ -44,16 +44,158 @@ const socialImage = `${siteUrl}/tactical.jpg`;
       <div class="overlay-card">
         <h1>Marcus Pratley</h1>
         <nav>
-          <a href="#software">software</a>
+          <a href="#software" data-section="software">software</a>
           <span class="separator">|</span>
-          <a href="#photography">photography</a>
+          <a href="#photography" data-section="photography">photography</a>
           <span class="separator">|</span>
-          <a href="#singing">singing</a>
+          <a href="#singing" data-section="singing">singing</a>
           <span class="separator">|</span>
-          <a href="#contact">contact</a>
+          <a href="#contact" data-section="contact">contact</a>
         </nav>
+
+        <!-- Content sections inside the same card -->
+        <div class="content-area">
+          <div id="software" class="content-section" data-content="software">
+            <p>
+              I build things on the web. Currently working on cool projects and
+              learning new technologies.
+            </p>
+            <div class="links">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer">GitHub</a
+              >
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer">LinkedIn</a
+              >
+            </div>
+          </div>
+
+          <div
+            id="photography"
+            class="content-section"
+            data-content="photography"
+          >
+            <p>
+              I capture moments and light. Mainly shooting street and landscape
+              photography.
+            </p>
+            <div class="links">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer">Instagram</a
+              >
+              <a
+                href="https://500px.com"
+                target="_blank"
+                rel="noopener noreferrer">Portfolio</a
+              >
+            </div>
+          </div>
+
+          <div id="singing" class="content-section" data-content="singing">
+            <p>
+              Music and performance have always been a passion of mine. I sing
+              and perform regularly.
+            </p>
+            <div class="links">
+              <a
+                href="https://soundcloud.com"
+                target="_blank"
+                rel="noopener noreferrer">SoundCloud</a
+              >
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer">YouTube</a
+              >
+            </div>
+          </div>
+
+          <div id="contact" class="content-section" data-content="contact">
+            <p>
+              Get in touch! I'm always happy to chat about projects,
+              collaborations, or just say hi.
+            </p>
+            <div class="links">
+              <a href="mailto:hello@marcusjp.com">Email</a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer">Twitter</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </main>
+
+    <script>
+      // Handle navigation clicks
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const section = link.getAttribute("data-section");
+          const contentSection = document.querySelector(
+            `[data-content="${section}"]`
+          );
+          const contentArea = document.querySelector(".content-area");
+
+          // If clicking the same active section, close it
+          if (contentSection && contentSection.classList.contains("active")) {
+            contentSection.classList.remove("active");
+            if (contentArea) {
+              contentArea.classList.remove("active");
+            }
+            return;
+          }
+
+          // Close all other content sections
+          document.querySelectorAll(".content-section").forEach((section) => {
+            section.classList.remove("active");
+          });
+
+          // Show the clicked content section
+          if (contentSection) {
+            contentSection.classList.add("active");
+          }
+          if (contentArea) {
+            contentArea.classList.add("active");
+          }
+        });
+      });
+
+      // Close content when clicking outside
+      document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest(".overlay-card")) {
+          document.querySelectorAll(".content-section").forEach((section) => {
+            section.classList.remove("active");
+          });
+          const contentArea = document.querySelector(".content-area");
+          if (contentArea) {
+            contentArea.classList.remove("active");
+          }
+        }
+      });
+
+      // Handle escape key to close content
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          document.querySelectorAll(".content-section").forEach((section) => {
+            section.classList.remove("active");
+          });
+          const contentArea = document.querySelector(".content-area");
+          if (contentArea) {
+            contentArea.classList.remove("active");
+          }
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -95,7 +237,7 @@ const socialImage = `${siteUrl}/tactical.jpg`;
 
   .overlay-card {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 8%;
     transform: translateY(-50%);
     background: linear-gradient(135deg, #fffbf2 0%, #fdf8ed 100%);
@@ -128,31 +270,61 @@ const socialImage = `${siteUrl}/tactical.jpg`;
     text-decoration: none;
     font-size: clamp(0.9rem, 2vw, 1.1rem);
     font-weight: 400;
-    position: relative;
   }
 
   nav a:hover {
     color: #8b6d47;
-  }
-
-  nav a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -2px;
-    left: 0;
-    background-color: #8b6d47;
-  }
-
-  nav a:hover::after {
-    width: 100%;
+    text-decoration: underline;
   }
 
   .separator {
     color: #2d2d2d;
     opacity: 0.4;
     font-weight: 300;
+  }
+
+  /* Content area and sections */
+  .content-area {
+    display: none;
+  }
+
+  .content-area.active {
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .content-section {
+    display: none;
+  }
+
+  .content-section.active {
+    display: block;
+  }
+
+  .content-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #2d2d2d;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .links a {
+    color: #2d2d2d;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .links a:hover {
+    color: #8b6d47;
+    text-decoration: underline;
   }
 
   /* Responsive adjustments */
@@ -178,6 +350,14 @@ const socialImage = `${siteUrl}/tactical.jpg`;
     .overlay-card {
       padding: 1.5rem 2rem;
       width: 90%;
+    }
+
+    .content-section p {
+      font-size: 0.95rem;
+    }
+
+    .links {
+      gap: 1rem;
     }
   }
 </style>

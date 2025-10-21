@@ -1,16 +1,183 @@
 ---
-
+const siteTitle = "Marcus Pratley";
+const siteDescription = "Marcus Pratley's website";
+const siteUrl = "https://marcusjp.com";
+const socialImage = `${siteUrl}/tactical.jpg`;
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{siteTitle}</title>
+    <meta name="description" content={siteDescription} />
+    <meta name="author" content="Marcus Pratley" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:image" content={socialImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={siteTitle} />
+    <meta property="twitter:description" content={siteDescription} />
+    <meta property="twitter:image" content={socialImage} />
+
+    <!-- Additional SEO -->
+    <link rel="canonical" href={siteUrl} />
+  </head>
+  <body>
+    <main class="hero">
+      <div class="hero-image"></div>
+      <div class="overlay-card">
+        <h1>Marcus Pratley</h1>
+        <nav>
+          <a href="#software">software</a>
+          <span class="separator">|</span>
+          <a href="#photography">photography</a>
+          <span class="separator">|</span>
+          <a href="#singing">singing</a>
+          <span class="separator">|</span>
+          <a href="#contact">contact</a>
+        </nav>
+      </div>
+    </main>
+  </body>
 </html>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+  }
+
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/tactical.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+
+  .overlay-card {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #fffbf2 0%, #fdf8ed 100%);
+    padding: 3rem 4rem;
+    border-radius: 0px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    font-family: "Noto Serif", serif;
+  }
+
+  .overlay-card h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #2d2d2d;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: #2d2d2d;
+    text-decoration: none;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 400;
+    position: relative;
+  }
+
+  nav a:hover {
+    color: #8b6d47;
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #8b6d47;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  .separator {
+    color: #2d2d2d;
+    opacity: 0.4;
+    font-weight: 300;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero-image {
+      background-image: url("/crop.jpg");
+    }
+
+    .overlay-card {
+      left: 50%;
+      transform: translate(-50%, 30%);
+      padding: 2rem 3rem;
+      width: 85%;
+      text-align: center;
+    }
+
+    nav {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .overlay-card {
+      padding: 1.5rem 2rem;
+      width: 90%;
+    }
+  }
+</style>

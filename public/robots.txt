@@ -1,0 +1,8 @@
+# robots.txt for marcusjp.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://marcusjp.com/sitemap-index.xml
+

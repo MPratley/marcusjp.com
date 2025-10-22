@@ -39,6 +39,7 @@ const socialImage = `${siteUrl}/tactical.jpg`;
 
     <!-- Additional SEO -->
     <link rel="canonical" href={siteUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
     <main class="hero">
@@ -57,7 +58,12 @@ const socialImage = `${siteUrl}/tactical.jpg`;
 
         <!-- Content sections inside the same card -->
         <div class="content-area">
-          <div id="software" class="content-section" data-content="software">
+          <section
+            id="software"
+            class="content-section"
+            data-content="software"
+          >
+            <h2>Software</h2>
             <p>
               I build things for the web, mostly. <br /><br />
               Active projects:
@@ -87,15 +93,16 @@ const socialImage = `${siteUrl}/tactical.jpg`;
                 rel="noopener noreferrer">LinkedIn</a
               >
             </div>
-          </div>
+          </section>
 
-          <div
+          <section
             id="photography"
             class="content-section"
             data-content="photography"
           >
+            <h2>Photography</h2>
             <p>
-              I do a fair amount of film photography, and sometimes devlop it
+              I do a fair amount of film photography, and sometimes develop it
               myself too. I do a few headshots and photoshoots for choirs and
               other groups - get in touch if you'd like to work together.
             </p>
@@ -107,9 +114,10 @@ const socialImage = `${siteUrl}/tactical.jpg`;
                 rel="noopener noreferrer">Instagram</a
               >
             </div>
-          </div>
+          </section>
 
-          <div id="singing" class="content-section" data-content="singing">
+          <section id="singing" class="content-section" data-content="singing">
+            <h2>Singing</h2>
             <p>
               Currently singing at St Gabriel's Pimlico on Sunday mornings, and
               with the Symbel Choir most weeks for the odd service here and
@@ -122,9 +130,10 @@ const socialImage = `${siteUrl}/tactical.jpg`;
                 rel="noopener noreferrer">Symbel Choir</a
               >
             </div>
-          </div>
+          </section>
 
-          <div id="contact" class="content-section" data-content="contact">
+          <section id="contact" class="content-section" data-content="contact">
+            <h2>Contact</h2>
             <p>
               Get in touch! I'm always happy to chat about projects, thoughts,
               or just to say hi if we've met before. I'm available on email and
@@ -145,8 +154,98 @@ const socialImage = `${siteUrl}/tactical.jpg`;
                 rel="noopener noreferrer">Instagram</a
               >
             </div>
-          </div>
+          </section>
         </div>
+
+        <!-- Noscript fallback for SEO -->
+        <noscript>
+          <div class="noscript-content">
+            <section>
+              <h2>Software</h2>
+              <p>
+                I build things for the web, mostly. <br /><br />
+                Active projects:
+              </p>
+              <ul>
+                <li>
+                  <a href="https://pointsofview.london">pointsofview.london</a> -
+                  a website to match your letterboxd watchlist with cinema showtimes
+                  in London
+                </li>
+                <li>
+                  <a href="https://symbel.marcusjp.com">symbel.marcusjp.com</a> -
+                  a calendar app website / extension for the Symbel Choir.
+                </li>
+              </ul>
+              <p>
+                Past projects can be found on my github. My CV is available on
+                my LinkedIn.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/mpratley"
+                  target="_blank"
+                  rel="noopener noreferrer">GitHub</a
+                > |
+                <a
+                  href="https://linkedin.com/in/MPratley"
+                  target="_blank"
+                  rel="noopener noreferrer">LinkedIn</a
+                >
+              </p>
+            </section>
+
+            <section>
+              <h2>Photography</h2>
+              <p>
+                I do a fair amount of film photography, and sometimes develop it
+                myself too. I do a few headshots and photoshoots for choirs and
+                other groups - get in touch if you'd like to work together.
+              </p>
+              <p>-- photo portfolio WIP --</p>
+              <p>
+                <a
+                  href="https://instagram.com/jpmarcusco"
+                  target="_blank"
+                  rel="noopener noreferrer">Instagram</a
+                >
+              </p>
+            </section>
+
+            <section>
+              <h2>Singing</h2>
+              <p>
+                Currently singing at St Gabriel's Pimlico on Sunday mornings,
+                and with the Symbel Choir most weeks for the odd service here
+                and there.
+              </p>
+              <p>
+                <a
+                  href="https://symbelchoir.co.uk/"
+                  target="_blank"
+                  rel="noopener noreferrer">Symbel Choir</a
+                >
+              </p>
+            </section>
+
+            <section>
+              <h2>Contact</h2>
+              <p>
+                Get in touch! I'm always happy to chat about projects, thoughts,
+                or just to say hi if we've met before. I'm available on email
+                and instagram.
+              </p>
+              <p>
+                Email: hi@marcusjp.com |
+                <a
+                  href="https://instagram.com/jpmarcusco"
+                  target="_blank"
+                  rel="noopener noreferrer">Instagram</a
+                >
+              </p>
+            </section>
+          </div>
+        </noscript>
       </div>
     </main>
 
@@ -351,6 +450,19 @@ const socialImage = `${siteUrl}/tactical.jpg`;
     display: block;
   }
 
+  .content-section h2 {
+    /* Visually hidden but accessible to screen readers and search engines */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   .content-section p {
     font-size: 1rem;
     line-height: 1.6;
@@ -396,6 +508,53 @@ const socialImage = `${siteUrl}/tactical.jpg`;
   .links a:hover {
     color: #8b6d47;
     text-decoration: underline;
+  }
+
+  /* Noscript content styling */
+  .noscript-content {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(45, 45, 45, 0.2);
+  }
+
+  .noscript-content section {
+    margin-bottom: 2rem;
+  }
+
+  .noscript-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 1rem;
+  }
+
+  .noscript-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #2d2d2d;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .noscript-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+  }
+
+  .noscript-content li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .noscript-content li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: #2d2d2d;
+    font-weight: 700;
   }
 
   /* Responsive adjustments */

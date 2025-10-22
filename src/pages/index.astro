@@ -165,6 +165,7 @@ const socialImage = `${siteUrl}/tactical.jpg`;
             if (contentArea) {
               contentArea.classList.remove("active");
             }
+            document.body.classList.remove("content-active");
             return;
           }
 
@@ -180,6 +181,7 @@ const socialImage = `${siteUrl}/tactical.jpg`;
           if (contentArea) {
             contentArea.classList.add("active");
           }
+          document.body.classList.add("content-active");
         });
       });
 
@@ -206,6 +208,7 @@ const socialImage = `${siteUrl}/tactical.jpg`;
           if (contentArea) {
             contentArea.classList.remove("active");
           }
+          document.body.classList.remove("content-active");
         }
       });
 
@@ -219,6 +222,7 @@ const socialImage = `${siteUrl}/tactical.jpg`;
           if (contentArea) {
             contentArea.classList.remove("active");
           }
+          document.body.classList.remove("content-active");
         }
       });
     </script>
@@ -241,11 +245,27 @@ const socialImage = `${siteUrl}/tactical.jpg`;
     overflow: hidden;
   }
 
+  /* Allow scrolling on mobile when content is active */
+  @media (max-width: 768px) {
+    body.content-active {
+      overflow-y: auto;
+    }
+  }
+
   .hero {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+  }
+
+  /* Allow hero to expand on mobile when content is active */
+  @media (max-width: 768px) {
+    body.content-active .hero {
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+    }
   }
 
   .hero-image {
@@ -389,6 +409,16 @@ const socialImage = `${siteUrl}/tactical.jpg`;
       padding: 2rem 3rem;
       width: 85%;
       text-align: left;
+    }
+
+    /* Adjust positioning when content is active */
+    body.content-active .overlay-card {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin: 10vh auto 2rem;
+      width: 85%;
     }
 
     nav {

@@ -57,17 +57,30 @@ const socialImage = `${siteUrl}/tactical.jpg`;
         <div class="content-area">
           <div id="software" class="content-section" data-content="software">
             <p>
-              I build things on the web. Currently working on cool projects and
-              learning new technologies.
+              I build things for the web, mostly. <br /><br />
+              Active projects:
+              <ul>
+                <li>
+                  <a href="https://pointsofview.london">pointsofview.london</a> -
+                  a website to match your letterboxd watchlist with cinema showtimes
+                  in London
+                </li>
+                <li>
+                  <a href="https://symbel.marcusjp.com">symbel.marcusjp.com</a> -
+                  a calendar app website / extension for the Symbel Choir.
+                </li>
+              </ul>
+              Past projects can be found on my github.
             </p>
+            <br /><br />
             <div class="links">
               <a
-                href="https://github.com"
+                href="https://github.com/mpratley"
                 target="_blank"
                 rel="noopener noreferrer">GitHub</a
               >
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/MPratley"
                 target="_blank"
                 rel="noopener noreferrer">LinkedIn</a
               >
@@ -80,53 +93,54 @@ const socialImage = `${siteUrl}/tactical.jpg`;
             data-content="photography"
           >
             <p>
-              I capture moments and light. Mainly shooting street and landscape
-              photography.
+              I do a fair amount of film photography, and sometimes devlop it
+              myself too. I do a few headshots and photoshoots for choirs and
+              other groups - get in touch if you'd like to work together.
             </p>
+            <p>-- photo portfolio WIP --</p>
             <div class="links">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/jpmarcusco"
                 target="_blank"
                 rel="noopener noreferrer">Instagram</a
-              >
-              <a
-                href="https://500px.com"
-                target="_blank"
-                rel="noopener noreferrer">Portfolio</a
               >
             </div>
           </div>
 
           <div id="singing" class="content-section" data-content="singing">
             <p>
-              Music and performance have always been a passion of mine. I sing
-              and perform regularly.
+              Currently singing at St Gabriel's Pimlico on Sunday mornings, and
+              with the Symbel Choir most weeks for the odd service here and
+              there.
             </p>
             <div class="links">
               <a
-                href="https://soundcloud.com"
+                href="https://symbelchoir.co.uk/"
                 target="_blank"
-                rel="noopener noreferrer">SoundCloud</a
-              >
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer">YouTube</a
+                rel="noopener noreferrer">Symbel Choir</a
               >
             </div>
           </div>
 
           <div id="contact" class="content-section" data-content="contact">
             <p>
-              Get in touch! I'm always happy to chat about projects,
-              collaborations, or just say hi.
+              Get in touch! I'm always happy to chat about projects, thoughts,
+              or just to say hi if we've met before. I'm available on email and
+              instagram.
             </p>
             <div class="links">
-              <a href="mailto:hello@marcusjp.com">Email</a>
               <a
-                href="https://twitter.com"
+                href="#"
+                class="email-link"
+                data-user="hi"
+                data-domain="marcusjp.com"
+              >
+                hi[at]marcusjp[dot]com
+              </a>
+              <a
+                href="https://instagram.com/jpmarcusco"
                 target="_blank"
-                rel="noopener noreferrer">Twitter</a
+                rel="noopener noreferrer">Instagram</a
               >
             </div>
           </div>
@@ -165,6 +179,18 @@ const socialImage = `${siteUrl}/tactical.jpg`;
           }
           if (contentArea) {
             contentArea.classList.add("active");
+          }
+        });
+      });
+
+      // Handle email link clicks
+      document.querySelectorAll(".email-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const user = link.getAttribute("data-user");
+          const domain = link.getAttribute("data-domain");
+          if (user && domain) {
+            window.location.href = `mailto:${user}@${domain}`;
           }
         });
       });
@@ -237,9 +263,8 @@ const socialImage = `${siteUrl}/tactical.jpg`;
 
   .overlay-card {
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 8%;
-    transform: translateY(-50%);
     background: linear-gradient(135deg, #fffbf2 0%, #fdf8ed 100%);
     padding: 3rem 4rem;
     border-radius: 0px;
@@ -265,16 +290,19 @@ const socialImage = `${siteUrl}/tactical.jpg`;
     flex-wrap: wrap;
   }
 
-  nav a {
+  a {
     color: #2d2d2d;
     text-decoration: none;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    font-weight: 400;
   }
 
-  nav a:hover {
+  a:hover {
     color: #8b6d47;
     text-decoration: underline;
+  }
+
+  nav a {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 400;
   }
 
   .separator {
@@ -309,6 +337,27 @@ const socialImage = `${siteUrl}/tactical.jpg`;
     opacity: 0.9;
   }
 
+  .content-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+  }
+
+  .content-section li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .content-section li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: #2d2d2d;
+    font-weight: 700;
+  }
+
   .links {
     display: flex;
     gap: 1.5rem;
@@ -334,15 +383,16 @@ const socialImage = `${siteUrl}/tactical.jpg`;
     }
 
     .overlay-card {
+      top: 55%;
       left: 50%;
-      transform: translate(-50%, 30%);
+      transform: translateX(-50%);
       padding: 2rem 3rem;
       width: 85%;
-      text-align: center;
+      text-align: left;
     }
 
     nav {
-      justify-content: center;
+      justify-content: left;
     }
   }
 
